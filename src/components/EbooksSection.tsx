@@ -27,6 +27,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
+import { ControllerRenderProps } from "react-hook-form";
 
 const ebooksFormSchema = z.object({
   name: z.string().min(2, "Informe seu nome"),
@@ -40,13 +41,17 @@ const ebooksFormSchema = z.object({
   }),
 });
 
+type EbooksFormData = z.infer<typeof ebooksFormSchema>;
+
+type FormFieldProps = ControllerRenderProps<EbooksFormData, keyof EbooksFormData>;
+
 export default function EbooksSection() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedEbook, setSelectedEbook] = useState<string>("");
 
-  const form = useForm<z.infer<typeof ebooksFormSchema>>({
+  const form = useForm<EbooksFormData>({
     resolver: zodResolver(ebooksFormSchema),
     defaultValues: {
       name: "",
@@ -59,7 +64,7 @@ export default function EbooksSection() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof ebooksFormSchema>) {
+  function onSubmit(values: EbooksFormData) {
     console.log("Solicitação de e-book", selectedEbook, values);
     
     // Enviar dados para o webhook
@@ -184,7 +189,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="name"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>Nome</FormLabel>
                       <FormControl>
@@ -198,7 +203,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="phone"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>Telefone</FormLabel>
                       <FormControl>
@@ -212,7 +217,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>E-mail</FormLabel>
                       <FormControl>
@@ -226,7 +231,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="city"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>Cidade</FormLabel>
                       <FormControl>
@@ -240,7 +245,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="country"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>País</FormLabel>
                       <FormControl>
@@ -254,7 +259,7 @@ export default function EbooksSection() {
                 <FormField
                   control={form.control}
                   name="profession"
-                  render={({ field }) => (
+                  render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
                       <FormLabel>Atividade profissional</FormLabel>
                       <FormControl>
@@ -269,7 +274,7 @@ export default function EbooksSection() {
               <FormField
                 control={form.control}
                 name="revenue"
-                render={({ field }) => (
+                render={({ field }: { field: FormFieldProps }) => (
                   <FormItem>
                     <FormLabel>Faturamento</FormLabel>
                     <FormControl>
