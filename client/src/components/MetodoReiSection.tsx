@@ -26,7 +26,7 @@ export default function MetodoReiSection() {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation();
 
   return (
-    <section id="metodo-rei" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
+    <section id="metodo" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background with slight noise */}
       <div className="absolute inset-0">
         <img

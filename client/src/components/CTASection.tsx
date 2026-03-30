@@ -7,7 +7,7 @@ export default function CTASection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="relative py-28 md:py-36 overflow-hidden">
+    <section id="contato" className="relative py-28 md:py-36 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <img

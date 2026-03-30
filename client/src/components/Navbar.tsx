@@ -2,24 +2,18 @@
 import { useState, useEffect } from "react";
 import { NAV_LINKS } from "@/lib/constants";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setMobileOpen(false);
-  };
 
   return (
     <nav
@@ -32,10 +26,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <button
-            onClick={() => scrollToSection("#")}
-            className="flex items-center gap-3 group cursor-pointer"
-          >
+          <Link href="/" className="flex items-center gap-3 group">
             <span className="font-serif text-xl md:text-2xl font-bold tracking-wide text-[#F5F0E8] group-hover:text-[#C9A84C] transition-colors duration-300">
               HEWERTON
             </span>
@@ -43,19 +34,40 @@ export default function Navbar() {
             <span className="hidden sm:block font-sans text-xs tracking-[0.3em] uppercase text-[#C9A84C]/70">
               Scheidegger
             </span>
-          </button>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="font-sans text-sm tracking-[0.15em] uppercase text-[#F5F0E8]/70 hover:text-[#C9A84C] transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#C9A84C] after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
-              >
-                {link.label}
-              </button>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isExternal = link.href.startsWith("#");
+              const isActive = !isExternal && location === link.href;
+              
+              if (isExternal) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="font-sans text-sm tracking-[0.15em] uppercase text-[#F5F0E8]/70 hover:text-[#C9A84C] transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#C9A84C] after:transition-all after:duration-300 hover:after:w-full"
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`font-sans text-sm tracking-[0.15em] uppercase transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:bg-[#C9A84C] after:transition-all after:duration-300 ${
+                    isActive
+                      ? "text-[#C9A84C] after:w-full"
+                      : "text-[#F5F0E8]/70 hover:text-[#C9A84C] after:w-0 hover:after:w-full"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile Toggle */}
@@ -76,15 +88,42 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-[#0A0A0A]/95 backdrop-blur-md border-t border-[#C9A84C]/10 px-4 py-6 space-y-4">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => scrollToSection(link.href)}
-              className="block font-sans text-sm tracking-[0.15em] uppercase text-[#F5F0E8]/70 hover:text-[#C9A84C] transition-colors duration-300 py-2 w-full text-left cursor-pointer"
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isExternal = link.href.startsWith("#");
+            const isActive = !isExternal && location === link.href;
+            
+            if (isExternal) {
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block font-sans text-sm tracking-[0.15em] uppercase transition-colors duration-300 py-2 ${
+                    isActive
+                      ? "text-[#C9A84C]"
+                      : "text-[#F5F0E8]/70 hover:text-[#C9A84C]"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+            
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={`block font-sans text-sm tracking-[0.15em] uppercase transition-colors duration-300 py-2 ${
+                  isActive
+                    ? "text-[#C9A84C]"
+                    : "text-[#F5F0E8]/70 hover:text-[#C9A84C]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>

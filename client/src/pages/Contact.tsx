@@ -50,8 +50,8 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] flex flex-col">
-      <Navbar />
-      <main className="flex-grow flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8">
+     
+      <main className="flex-grow flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl w-full space-y-8 bg-zinc-900/40 p-10 rounded-2xl border border-zinc-800/50 backdrop-blur-md shadow-2xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl uppercase font-serif gold-text">

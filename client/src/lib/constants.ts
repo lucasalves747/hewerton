@@ -19,7 +19,7 @@ export const NAV_LINKS = [
   { label: "Livros", href: "#livros" },
   { label: "E-books", href: "#ebooks" },
   { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Contato", href: "#contato" },
+  { label: "Contato", href: "/contato" },
 ] as const;
 
 export const STATS = [
