@@ -62,13 +62,13 @@ export const BOOKS = [
     title: "1000 Códigos de Sabedoria",
     description: "Uma coletânea poderosa de princípios e códigos que transformam a mentalidade e direcionam para uma vida de prosperidade, sabedoria e propósito.",
     price: "R$ 79,90",
-    link: "#",
+    link: "https://wa.me/554391618017?text=Ol%C3%A1%20Hewerton%20Scheidegger%2C%20quero%20adquirir%20o%20livro%20*1000%20C%C3%B3digos%20de%20Sabedoria*",
   },
   {
     title: "Método 7D para Milhões em Vendas",
     description: "O guia definitivo para dominar as 7 dimensões das vendas de alto impacto e construir um negócio que gera milhões com estratégia e consistência.",
     price: "R$ 89,90",
-    link: "#",
+    link: "https://wa.me/554391618017?text=Ol%C3%A1%20Hewerton%20Scheidegger%2C%20quero%20adquirir%20o%20livro%20*M%C3%A9todo%207D%20para%20Milh%C3%B5es%20em%20Vendas*",
   },
 ] as const;
 

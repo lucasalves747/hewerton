@@ -78,6 +78,8 @@ export default function BooksSection() {
                   </div>
                   <a
                     href={book.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C9A84C] to-[#E8D48B] text-[#0A0A0A] font-sans font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.25)] hover:scale-[1.02]"
                   >
                     <ShoppingCart size={16} />
