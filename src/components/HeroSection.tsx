@@ -35,21 +35,19 @@ export default function HeroSection() {
         <div className="max-w-2xl">
           {/* Tag line */}
           <div
-            className={`flex items-center gap-3 mb-8 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`flex items-center gap-3 mb-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <div className="w-12 h-px bg-[#C9A84C]" />
             <span className="font-sans text-xs tracking-[0.4em] uppercase text-[#C9A84C]">
-              Prosperidade &bull; Riqueza &bull; Propósito
+              Prosperidade &bull; Propósito
             </span>
           </div>
 
           {/* Name */}
           <h1
-            className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6 transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <span className="text-[#F5F0E8]">HEWERTON</span>
             <br />
@@ -70,9 +68,8 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p
-            className={`font-sans text-lg md:text-xl text-[#F5F0E8]/70 leading-relaxed mb-10 max-w-lg transition-all duration-700 delay-400 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`font-sans text-lg md:text-xl text-[#F5F0E8]/70 leading-relaxed mb-10 max-w-lg transition-all duration-700 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             Empresário, mentor de negócios e criador do{" "}
             <span className="text-[#C9A84C] font-medium">Método REI</span>.
@@ -81,9 +78,8 @@ export default function HeroSection() {
 
           {/* CTA */}
           <div
-            className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-500 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <a
               href="https://metodorei.com/"
