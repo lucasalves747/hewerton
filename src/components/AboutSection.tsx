@@ -62,7 +62,7 @@ export default function AboutSection() {
             </p>
 
             <p className="font-sans text-base text-[#F5F0E8]/60 leading-relaxed mb-8">
-              Casado quase 30 anos com Luciana, é pai de Lucas, Israel e João. Empresário, mentor de negócios e autor dos livros 1000 Códigos de Sabedoria e Método 7D para Milhões em Vendas. Advogado tributarista, contador e especialista em finanças, fundou e participou da construção de diversas empresas nas áreas de consultoria, tecnologia, finanças e gestão.
+              Casado com Luciana, é pai de Lucas, Israel e João. Empresário, mentor de negócios e autor dos livros 1000 Códigos de Sabedoria e Método 7D para Milhões em Vendas. Advogado tributarista, contador e especialista em finanças, fundou e participou da construção de diversas empresas nas áreas de consultoria, tecnologia, finanças e gestão.
               Criador do Método REI, já treinou e mentorou milhares de pessoas em temas como prosperidade, riqueza, crescimento empresarial, mentalidade, alta performance e liderança de vida.
             </p>
 

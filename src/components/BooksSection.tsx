@@ -1,9 +1,11 @@
 // DESIGN: Sovereign Noir — Seção de livros com cards premium
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ASSETS, BOOKS } from "@/lib/constants";
-import { ShoppingCart, BookOpen } from "lucide-react";
+import { ShoppingCart, BookOpen, X } from "lucide-react";
 
 export default function BooksSection() {
+  const [selectedBook, setSelectedBook] = useState<typeof BOOKS[0] | null>(null);
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { ref: booksRef, isVisible: booksVisible } = useScrollAnimation();
 
@@ -17,7 +19,7 @@ export default function BooksSection() {
           className="w-full h-full object-cover opacity-30"
         />
         <div className="absolute inset-0 bg-[#0A0A0A]/90" />
-        
+
         {/* Bookshelf Spotlight Glow */}
         <div className="absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-5xl h-[600px] bg-[#eeba2d]/10 blur-[120px] rounded-full pointer-events-none" />
       </div>
@@ -76,21 +78,64 @@ export default function BooksSection() {
                     <span className="font-sans text-xs tracking-[0.2em] uppercase text-[#F5F0E8]/40">A partir de</span>
                     <div className="font-serif text-2xl font-bold gold-text">{book.price}</div>
                   </div>
-                  <a
-                    href={book.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => setSelectedBook(book)}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C9A84C] to-[#E8D48B] text-[#0A0A0A] font-sans font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.25)] hover:scale-[1.02]"
                   >
                     <ShoppingCart size={16} />
                     Comprar
-                  </a>
+                  </button>
+
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Modal de Compra */}
+      {selectedBook && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-sm"
+            onClick={() => setSelectedBook(null)}
+          />
+          <div className="relative bg-[#111111] border border-[#C9A84C]/20 p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setSelectedBook(null)}
+              className="absolute top-4 right-4 text-[#F5F0E8]/50 hover:text-[#C9A84C] transition-colors"
+            >
+              <X size={24} />
+            </button>
+            
+            <h3 className="font-serif text-2xl font-bold text-[#F5F0E8] mb-2 pr-8">
+              Onde deseja comprar?
+            </h3>
+            <p className="font-sans text-[#F5F0E8]/60 mb-8 text-sm">
+              {selectedBook.title}
+            </p>
+
+            <div className="flex flex-col gap-4">
+              <a
+                href={selectedBook.amazonLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#111111] border border-[#C9A84C]/20 text-[#F5F0E8] font-sans font-bold uppercase tracking-[0.15em] text-xs transition-all duration-300 hover:border-[#C9A84C]/60 hover:bg-[#C9A84C]/5 hover:scale-[1.02]"
+              >
+                Amazon USA
+              </a>
+              <a
+                href={selectedBook.mercadoLivreLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#111111] border border-[#C9A84C]/20 text-[#F5F0E8] font-sans font-bold uppercase tracking-[0.15em] text-xs transition-all duration-300 hover:border-[#C9A84C]/60 hover:bg-[#C9A84C]/5 hover:scale-[1.02]"
+              >
+                Mercado Livre
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
