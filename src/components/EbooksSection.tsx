@@ -50,6 +50,7 @@ export default function EbooksSection() {
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedEbook, setSelectedEbook] = useState<string>("");
+  const [selectedEbookLink, setSelectedEbookLink] = useState<string>("");
 
   const form = useForm<EbooksFormData>({
     resolver: zodResolver(ebooksFormSchema),
@@ -75,14 +76,18 @@ export default function EbooksSection() {
       },
       body: JSON.stringify({
         ebook: selectedEbook,
+        downloadLink: selectedEbookLink,
         ...values,
       }),
     })
       .then((response) => {
         if (response.ok) {
-          toast.success("Formulario enviado com sucesso! Em breve enviaremos o e-book.");
+          toast.success("Formulario enviado com sucesso! Abrindo o e-book...");
           form.reset();
           setIsDialogOpen(false);
+          if (selectedEbookLink && selectedEbookLink !== "#") {
+            window.location.href = selectedEbookLink;
+          }
         } else {
           throw new Error("Erro ao enviar formulário");
         }
@@ -93,8 +98,9 @@ export default function EbooksSection() {
       });
   }
 
-  function handleOpenRequest(ebookTitle: string) {
+  function handleOpenRequest(ebookTitle: string, ebookLink: string) {
     setSelectedEbook(ebookTitle);
+    setSelectedEbookLink(ebookLink);
     setIsDialogOpen(true);
   }
 
@@ -159,7 +165,7 @@ export default function EbooksSection() {
                     </p>
                     <button
                       type="button"
-                      onClick={() => handleOpenRequest(ebook.title)}
+                      onClick={() => handleOpenRequest(ebook.title, ebook.downloadLink)}
                       className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.15em] uppercase text-[#C9A84C] hover:text-[#E8D48B] transition-colors"
                     >
                       <Download size={14} />

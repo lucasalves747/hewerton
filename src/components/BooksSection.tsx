@@ -9,6 +9,15 @@ export default function BooksSection() {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { ref: booksRef, isVisible: booksVisible } = useScrollAnimation();
 
+  function handleBuyClick(book: typeof BOOKS[number]) {
+    if (book.title === "Método 7D para Milhões em Vendas") {
+      window.location.href = book.link;
+      return;
+    }
+
+    setSelectedBook(book);
+  }
+
   return (
     <section id="livros" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background gradients */}
@@ -75,11 +84,11 @@ export default function BooksSection() {
                 {/* Price and CTA */}
                 <div className="flex items-center justify-between pt-6 border-t border-[#C9A84C]/10">
                   <div>
-                    <span className="font-sans text-xs tracking-[0.2em] uppercase text-[#F5F0E8]/40">A partir de</span>
-                    <div className="font-serif text-2xl font-bold gold-text">{book.price}</div>
+
+
                   </div>
                   <button
-                    onClick={() => setSelectedBook(book)}
+                    onClick={() => handleBuyClick(book)}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C9A84C] to-[#E8D48B] text-[#0A0A0A] font-sans font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.25)] hover:scale-[1.02]"
                   >
                     <ShoppingCart size={16} />
@@ -96,18 +105,18 @@ export default function BooksSection() {
       {/* Modal de Compra */}
       {selectedBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-sm"
             onClick={() => setSelectedBook(null)}
           />
           <div className="relative bg-[#111111] border border-[#C9A84C]/20 p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-            <button 
+            <button
               onClick={() => setSelectedBook(null)}
               className="absolute top-4 right-4 text-[#F5F0E8]/50 hover:text-[#C9A84C] transition-colors"
             >
               <X size={24} />
             </button>
-            
+
             <h3 className="font-serif text-2xl font-bold text-[#F5F0E8] mb-2 pr-8">
               Onde deseja comprar?
             </h3>

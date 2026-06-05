@@ -70,7 +70,7 @@ export const BOOKS = [
     title: "Método 7D para Milhões em Vendas",
     description: "O guia definitivo para dominar as 7 dimensões das vendas de alto impacto e construir um negócio que gera milhões com estratégia e consistência.",
     price: "R$ 89,90",
-    link: "https://wa.me/554391618017?text=Ol%C3%A1%20Hewerton%20Scheidegger%2C%20quero%20adquirir%20o%20livro%20*M%C3%A9todo%207D%20para%20Milh%C3%B5es%20em%20Vendas*",
+    link: "https://pag.hewertonscheidegger.com/7d-para-milhares-em-venda",
     amazonLink: "#",
     mercadoLivreLink: "#",
   },
@@ -91,6 +91,11 @@ export const EBOOKS = [
     title: "Os 12 Pilares da Vida Extraordinária",
     description: "Um guia prático para desenvolver equilíbrio e excelência nas 12 áreas essenciais da vida.",
     downloadLink: "#",
+  },
+  {
+    title: "O Negócio que Trabalha por Você",
+    description: "Como sair do operacional, organizar sistemas, aplicar tecnologia e transformar sua empresa em um ativo de lucro, escala e liberdade.",
+    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a22baf9fc95b245498592eb.pdf",
   },
 ] as const;
 
