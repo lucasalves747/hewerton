@@ -91,7 +91,7 @@ function vitePluginManusDebugCollector(): Plugin {
               defer: true,
             },
             injectTo: "head",
-          },
+          }, 
         ],
       };
     },
