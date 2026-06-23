@@ -78,24 +78,24 @@ export const BOOKS = [
 
 export const EBOOKS = [
   {
-    title: "Guia da Prosperidade",
-    description: "Descubra os princípios fundamentais para desbloquear a prosperidade em todas as áreas da sua vida.",
-    downloadLink: "#",
+    title: "Gestão do Fluxo de Caixa",
+    description: "Estratégias reais e profundas para dominar suas finanças, liberar capital de giro e construir riqueza verdadeira.",
+    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a3a78ba2ed3b9e3239e5c43.pdf",
   },
   {
-    title: "Mentalidade de Riqueza",
-    description: "Aprenda a reprogramar sua mente para atrair abundância e construir riqueza de forma sustentável.",
-    downloadLink: "#",
+    title: "A Mente de um Reinante",
+    description: "Como desenvolver o repertório, a inteligência e a postura para governar em todas as áreas da vida.",
+    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a3a78ba109a1ab49db47840.pdf",
   },
   {
-    title: "Os 12 Pilares da Vida Extraordinária",
-    description: "Um guia prático para desenvolver equilíbrio e excelência nas 12 áreas essenciais da vida.",
-    downloadLink: "#",
+    title: "Desenvolvimento Profissional e Digital",
+    description: "Uma jornada prática para sair da invisibilidade, fortalecer sua identidade profissional e construir presença, valor e autoridade no mundo digital.",
+    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a3a78ba181eb301d428f6f3.pdf",
   },
   {
     title: "O Negócio que Trabalha por Você",
     description: "Como sair do operacional, organizar sistemas, aplicar tecnologia e transformar sua empresa em um ativo de lucro, escala e liberdade.",
-    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a22baf9fc95b245498592eb.pdf",
+    downloadLink: "https://assets.cdn.filesafe.space/cYP1bCri3hF8P5t4cgbk/media/6a3a78ba659bec99fc930d85.pdf",
   },
 ] as const;
 

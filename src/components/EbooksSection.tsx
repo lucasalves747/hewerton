@@ -25,20 +25,44 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import { ControllerRenderProps } from "react-hook-form";
 
+const PROFESSION_OPTIONS = [
+  "Limpeza residencial e comercial",
+  "Construção civil",
+  "Pintura",
+  "Flooring / pisos",
+  "Roofing / telhados",
+  "Landscaping / jardinagem",
+  "Moving / mudanças",
+  "Delivery e transporte",
+  "Restaurantes e alimentação",
+  "Salões de beleza e estética",
+  "Real Estate",
+  "Property management",
+  "Airbnb / vacation rental",
+  "Serviços automotivos",
+  "Contabilidade e tax services",
+  "Seguros",
+  "Consultoria migratória e documental",
+  "Marketing digital",
+  "Eventos e entretenimento",
+  "E-commerce",
+] as const;
+
 const ebooksFormSchema = z.object({
   name: z.string().min(2, "Informe seu nome"),
-  phone: z.string().min(8, "Informe um telefone válido"),
   email: z.string().email("E-mail inválido"),
-  city: z.string().min(2, "Informe sua cidade"),
-  country: z.string().min(2, "Informe seu país"),
-  profession: z.string().min(2, "Informe sua atividade profissional"),
-  revenue: z.enum(["<50k", "50k-100k", "100k-500k", "500k+"], {
-    error: "Informe seu faturamento",
-  }),
+  phone: z.string().min(8, "Informe um telefone válido"),
+  profession: z.string().min(2, "Selecione sua profissão"),
 });
 
 type EbooksFormData = z.infer<typeof ebooksFormSchema>;
@@ -56,12 +80,9 @@ export default function EbooksSection() {
     resolver: zodResolver(ebooksFormSchema),
     defaultValues: {
       name: "",
-      phone: "",
       email: "",
-      city: "",
-      country: "",
+      phone: "",
       profession: "",
-      revenue: "<50k",
     },
   });
 
@@ -69,7 +90,7 @@ export default function EbooksSection() {
     console.log("Solicitação de e-book", selectedEbook, values);
     
     // Enviar dados para o webhook
-    fetch("https://services.leadconnectorhq.com/hooks/cYP1bCri3hF8P5t4cgbk/webhook-trigger/002fa605-cc53-4662-ac92-15e6206832ef", {
+    fetch("https://services.leadconnectorhq.com/hooks/cYP1bCri3hF8P5t4cgbk/webhook-trigger/6a22b4c9-a1d7-4405-af6b-ea3876753330", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,20 +229,6 @@ export default function EbooksSection() {
 
                 <FormField
                   control={form.control}
-                  name="phone"
-                  render={({ field }: { field: FormFieldProps }) => (
-                    <FormItem>
-                      <FormLabel>Telefone</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="tel" placeholder="(11) 99999-9999" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
                   name="email"
                   render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
@@ -236,26 +243,12 @@ export default function EbooksSection() {
 
                 <FormField
                   control={form.control}
-                  name="city"
+                  name="phone"
                   render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
-                      <FormLabel>Cidade</FormLabel>
+                      <FormLabel>Telefone</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Cidade" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="country"
-                  render={({ field }: { field: FormFieldProps }) => (
-                    <FormItem>
-                      <FormLabel>País</FormLabel>
-                      <FormControl>
-                        <Input {...field} placeholder="País" />
+                        <Input {...field} type="tel" placeholder="(11) 99999-9999" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -267,58 +260,26 @@ export default function EbooksSection() {
                   name="profession"
                   render={({ field }: { field: FormFieldProps }) => (
                     <FormItem>
-                      <FormLabel>Atividade profissional</FormLabel>
-                      <FormControl>
-                        <Input {...field} placeholder="Ex: Empreendedor, Advogado" />
-                      </FormControl>
+                      <FormLabel>Profissão</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione sua profissão" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {PROFESSION_OPTIONS.map((option) => (
+                            <SelectItem key={option} value={option}>
+                              {option}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
-
-              <FormField
-                control={form.control}
-                name="revenue"
-                render={({ field }: { field: FormFieldProps }) => (
-                  <FormItem>
-                    <FormLabel>Faturamento</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        value={field.value}
-                        className="grid grid-cols-2 gap-2"
-                      >
-                        <FormItem className="p-2 border rounded">
-                          <FormControl>
-                            <RadioGroupItem value="<50k" />
-                          </FormControl>
-                          <FormLabel>Menos de 50K</FormLabel>
-                        </FormItem>
-                        <FormItem className="p-2 border rounded">
-                          <FormControl>
-                            <RadioGroupItem value="50k-100k" />
-                          </FormControl>
-                          <FormLabel>50K a 100K</FormLabel>
-                        </FormItem>
-                        <FormItem className="p-2 border rounded">
-                          <FormControl>
-                            <RadioGroupItem value="100k-500k" />
-                          </FormControl>
-                          <FormLabel>100K a 500K</FormLabel>
-                        </FormItem>
-                        <FormItem className="p-2 border rounded">
-                          <FormControl>
-                            <RadioGroupItem value="500k+" />
-                          </FormControl>
-                          <FormLabel>Acima de 500K</FormLabel>
-                        </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
               <DialogFooter>
                 <Button type="submit" className="w-full bg-[#C9A84C] text-black">Enviar e baixar</Button>
